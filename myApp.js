@@ -11,8 +11,9 @@ app.get("/", function(req, res) {
  // res.send('Hello Express');
 });
 
-
-//app.use(express.static(path.join(__dirname, 'public')));
+app.get("/json", function(req, res) {
+    res.json({"message": "Hello json"});
+});
 
 
 
