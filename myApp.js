@@ -66,6 +66,15 @@ app.get('/name', (req, res) => {
   res.send(result);
 });
 
+app.post('/name', (req, res) => {
+    
+  let first = req.body.first;
+  let last = req.body.last;
+  
+  let result = { name: `${first} ${last}` };
+  res.send(result);
+});
+
 
 
 
