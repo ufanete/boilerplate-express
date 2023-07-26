@@ -50,7 +50,15 @@ const printQueryParams = function(req, res, next) {
     res.json({name: result});
 };
 
-app.route("/name").get(printQueryParams).post(printQueryParams);
+//app.route("/name").get(printQueryParams).post(printQueryParams);
+
+app.get('/name', (req, res) => {
+  let first = req.query.first;
+  let last = req.query.last;
+  
+  let jsonObj = { name: `${first} ${last}` };
+  res.send(jsonObj);
+});
 
 
 
