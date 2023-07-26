@@ -42,7 +42,7 @@ app.get("/:word/echo", function(req, res, next) {
 const printQueryParams = function(req, res, next) {
     var result = "";
     for (var param in req.query) {
-        result += req.query[param] + " ";
+        result += req.query[param].trim() + " ";
     }
 
     result = result.trim();
