@@ -8,6 +8,12 @@ console.log(process.env.MESSAGE_STYLE);
 
 app.use("/public", express.static(path.join(__dirname + '/public')));
 
+// execution order matters
+app.use(function(req, res, next){
+    console.log(req.method + " " + req.path + " - " + req.ip);
+    next();
+});
+
 app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname + '/views/index.html'));
  // res.send('Hello Express');
@@ -20,6 +26,7 @@ app.get("/json", function(req, res) {
     }
     res.json({"message": value});
 });
+
 
 
 
