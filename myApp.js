@@ -1,8 +1,10 @@
+let dotenv = require('dotenv').config();
 let express = require('express');
 let app = express();
 var path = require('path');
 console.log("Hello World");
 console.log(path.join(__dirname + '/public'));
+console.log(process.env.MESSAGE_STYLE);
 
 app.use("/public", express.static(path.join(__dirname + '/public')));
 
@@ -12,7 +14,11 @@ app.get("/", function(req, res) {
 });
 
 app.get("/json", function(req, res) {
-    res.json({"message": "Hello json"});
+    var value = "Hello json";
+    if (process.env.MESSAGE_STYLE == "uppercase") {
+        value = value.toUpperCase();
+    }
+    res.json({"message": value});
 });
 
 
