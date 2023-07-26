@@ -1,12 +1,16 @@
-let dotenv = require('dotenv').config();
+
 let express = require('express');
 let app = express();
-var path = require('path');
+let path = require('path');
+require('dotenv').config();
+let bodyParser = require('body-parser');
+
 console.log("Hello World");
 console.log(path.join(__dirname + '/public'));
 console.log(process.env.MESSAGE_STYLE);
 
-app.use("/public", express.static(path.join(__dirname + '/public')));
+app.use("/public", express.static(path.join(__dirname + '/public/')));
+app.use(bodyParser.urlencoded({extended: false}));
 
 // execution order matters
 app.use(function(req, res, next){
@@ -39,6 +43,7 @@ app.get("/:word/echo", function(req, res, next) {
     res.json({echo: req.params.word});
 });
 
+/*
 const printQueryParams = function(req, res, next) {
     var result = "";
     for (var param in req.query) {
@@ -50,14 +55,15 @@ const printQueryParams = function(req, res, next) {
     res.json({name: result});
 };
 
-//app.route("/name").get(printQueryParams).post(printQueryParams);
+app.route("/name").get(printQueryParams).post(printQueryParams);
+*/
 
 app.get('/name', (req, res) => {
   let first = req.query.first;
   let last = req.query.last;
   
-  let jsonObj = { name: `${first} ${last}` };
-  res.send(jsonObj);
+  let result = { name: `${first} ${last}` };
+  res.send(result);
 });
 
 
