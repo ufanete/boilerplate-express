@@ -39,6 +39,18 @@ app.get("/:word/echo", function(req, res, next) {
     res.json({echo: req.params.word});
 });
 
+const printQueryParams = function(req, res, next) {
+    var result = "";
+    for (var param in req.query) {
+        result += param + " ";
+    }
+
+    result = result.trim();
+    console.log(result);
+    res.json({name: result});
+};
+
+app.route("/name").get(printQueryParams).post(printQueryParams);
 
 
 
